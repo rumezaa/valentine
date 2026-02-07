@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Balloon effect */
+.balloon-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -120px;
+  width: 50px;
+  height: 65px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: float-up 8s ease-in forwards;
+  box-shadow: inset -12px -12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.balloon::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 50% 50%;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 25px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+  border-radius: 1px;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 1;
+  }
+  15% {
+    transform: translateY(-30vh) translateX(5px) scale(0.85);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-55vh) translateX(-8px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-85vh) translateX(10px) scale(0.95);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-bg {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-fade-in-bg {
+  animation: fade-in-bg 1s ease-out forwards;
+}
+
+.emoji-red {
+  filter: sepia(1) saturate(5) hue-rotate(-50deg);
+}
